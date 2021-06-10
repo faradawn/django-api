@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from django.http import HttpResponse, Http404
 
 from .serializer import UserSerializer
@@ -16,4 +16,5 @@ def nope(request):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('username')
     serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
