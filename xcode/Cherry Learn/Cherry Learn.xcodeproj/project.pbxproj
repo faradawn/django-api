@@ -15,6 +15,8 @@
 		9C0144AD2673967C00EE4380 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0144822673967A00EE4380 /* ContentView.swift */; };
 		9C0144AE2673967C00EE4380 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C0144832673967C00EE4380 /* Assets.xcassets */; };
 		9C0144AF2673967C00EE4380 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C0144832673967C00EE4380 /* Assets.xcassets */; };
+		9C0144C32673979800EE4380 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0144C22673979800EE4380 /* Users.swift */; };
+		9C0144C42673979800EE4380 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0144C22673979800EE4380 /* Users.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,7 @@
 		9C0144A32673967C00EE4380 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C0144A72673967C00EE4380 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		9C0144A92673967C00EE4380 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C0144C22673979800EE4380 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,7 @@
 				9C0144812673967A00EE4380 /* Cherry_LearnApp.swift */,
 				9C0144822673967A00EE4380 /* ContentView.swift */,
 				9C0144832673967C00EE4380 /* Assets.xcassets */,
+				9C0144C22673979800EE4380 /* Users.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -309,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C0144AC2673967C00EE4380 /* ContentView.swift in Sources */,
+				9C0144C32673979800EE4380 /* Users.swift in Sources */,
 				9C0144AA2673967C00EE4380 /* Cherry_LearnApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C0144AD2673967C00EE4380 /* ContentView.swift in Sources */,
+				9C0144C42673979800EE4380 /* Users.swift in Sources */,
 				9C0144AB2673967C00EE4380 /* Cherry_LearnApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
