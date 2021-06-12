@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 # superuser: Faradawn, proust4043, 123456
+# add secret 
 
 from pathlib import Path
 
