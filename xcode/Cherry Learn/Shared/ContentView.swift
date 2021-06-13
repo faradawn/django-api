@@ -30,7 +30,7 @@ struct ContentView: View {
                 Image(systemName: "circle")
             }))
             .sheet(isPresented: $showAdd, content: {
-                AddView()
+                AddView(functionCall: self.loadAccount)
             })
             
             
@@ -76,6 +76,8 @@ struct AddView : View {
     @State var phone: String = ""
     @State var password: String = ""
     
+    var functionCall: () -> Void
+    
     var body: some View {
         NavigationView{
             List{
@@ -86,16 +88,57 @@ struct AddView : View {
                     TextField("Password: ", text: $password)
                     Image(systemName: "square")
                 }
+                
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Add User")
             .navigationBarItems(
                 leading: Button("Cancel"){presentationMode.wrappedValue.dismiss()},
-                trailing: Button(action: {}, label: {Text("Save")})
+                trailing: Button(action: {postAccount()}, label: {Text("Save")})
             )
             
             
         }
+    }
+    
+    func postAccount(){
+        guard let users_url = URL(string: "http://127.0.0.1:8000/myapi/users/") else {
+            print("myapi is crashed")
+            return
+        }
+        
+        let accountData = Users(id: 0, username: self.username, email: self.email, phone: self.phone, password: self.password)
+        // need created_at: "" ?
+        
+        guard let encoded = try? JSONEncoder().encode(accountData) else {
+            print("fail to encode")
+            return
+        }
+        
+        
+        var request = URLRequest(url: users_url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("Basic RmFyYWRhd246MTIzNDU2", forHTTPHeaderField: "Authorization")
+        request.httpBody = encoded
+        
+        
+        URLSession.shared.dataTask(with: request){
+            data, response, error in
+            if let data = data {
+                if let response = try?
+                    JSONDecoder().decode(
+                        Users.self, from: data){
+                    DispatchQueue.main.async {
+                        self.functionCall()
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    return
+                }
+            }
+        }.resume()
+        
     }
 }
 
