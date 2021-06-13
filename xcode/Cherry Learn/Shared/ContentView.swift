@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var users = [Users]()
+    @State var users = [Users]() // change to users: Users
     @State var showAdd = true
     
     // view
@@ -17,14 +17,17 @@ struct ContentView: View {
             List{
                 ForEach(users) {
                     item in HStack{
-                        Image(systemName: "banknote").foregroundColor(.green)
-                        Text(item.username)
-                        Text("\(item.email)")
+                        NavigationLink( destination: UserDetailedView(users: item)){
+                            Image(systemName: "banknote").foregroundColor(.green)
+                            Text(item.username)
+                            Text("\(item.email)")
+                        }
+                        
                     }
                 }
                 
             }
-            
+            .onAppear(perform: loadAccount)
             .navigationBarTitle("Users")
             .navigationBarItems(trailing: Button(action: {showAdd.toggle()}, label: {
                 Image(systemName: "circle")
@@ -36,7 +39,7 @@ struct ContentView: View {
             
         }
         
-        .onAppear(perform: loadAccount)
+        
     }
     
     
@@ -127,15 +130,14 @@ struct AddView : View {
         URLSession.shared.dataTask(with: request){
             data, response, error in
             if let data = data {
-                if let response = try?
-                    JSONDecoder().decode(
-                        Users.self, from: data){
+                
                     DispatchQueue.main.async {
+                        print("\(data)")
                         self.functionCall()
                         presentationMode.wrappedValue.dismiss()
                     }
                     return
-                }
+                
             }
         }.resume()
         
