@@ -9,17 +9,39 @@ import SwiftUI
 
 struct ContentView: View {
     @State var users = [Users]()
-    // view render
+    @State var showAdd = true
+    
+    // view
     var body: some View {
-        ForEach(users, id: \.self) {
-            item in HStack{
-                Image(systemName: "banknote").foregroundColor(.green)
-                Text(item.username)
-                Text("\(item.email)")
+        NavigationView{
+            List{
+                ForEach(users) {
+                    item in HStack{
+                        Image(systemName: "banknote").foregroundColor(.green)
+                        Text(item.username)
+                        Text("\(item.email)")
+                    }
+                }
+                
             }
-        }.onAppear(perform: loadAccount)
+            
+            .navigationBarTitle("Users")
+            .navigationBarItems(trailing: Button(action: {showAdd.toggle()}, label: {
+                Image(systemName: "circle")
+            }))
+            .sheet(isPresented: $showAdd, content: {
+                AddView()
+            })
+            
+            
+        }
+        
+        .onAppear(perform: loadAccount)
     }
-    // fetch data
+    
+    
+    
+    // load account
     func loadAccount() {
         guard let users_url = URL(string: "http://127.0.0.1:8000/myapi/users/") else {
             print("myapi is crashed")
@@ -44,6 +66,36 @@ struct ContentView: View {
             }
         }.resume()
         
+    }
+}
+
+struct AddView : View {
+    @Environment(\.presentationMode) var presentationMode
+    @State var username: String = ""
+    @State var email: String = ""
+    @State var phone: String = ""
+    @State var password: String = ""
+    
+    var body: some View {
+        NavigationView{
+            List{
+                Section{
+                    TextField("Username: ", text: $username)
+                    TextField("Email: ", text: $email)
+                    TextField("Phone: ", text: $phone)
+                    TextField("Password: ", text: $password)
+                    Image(systemName: "square")
+                }
+            }
+            .listStyle(GroupedListStyle())
+            .navigationBarTitle("Add User")
+            .navigationBarItems(
+                leading: Button("Cancel"){presentationMode.wrappedValue.dismiss()},
+                trailing: Button(action: {}, label: {Text("Save")})
+            )
+            
+            
+        }
     }
 }
 
