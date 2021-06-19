@@ -1,27 +1,56 @@
 # A Django REST api with Swift Frontend
 
-## Deploy to Ubuntu 20.04
+## Deploy to Ubuntu 18.04
 ### 1 - setup
-`apt update`
-`hostnamectl set-hostname django-server` check by hostname
-`nano /etc/hosts`   添加103.79.76.243     django-server
+设置新host和user
+`apt-get update && apt-get upgrade` 更新系统  
+
+`hostnamectl set-hostname django-server` 设置hostname, 输入 `hostname` 检测
+
+`nano /etc/hosts`   添加 103.79.76.243     django-server
+
 `adduser faradawn` 密码，其他回车
-`adduser faradawn sudo` 赋予sudo权利
+
+ `adduser faradawn sudo` 赋予sudo权利
+
 `exit` 退出root
-重新ssh faradawn@103.79.76.243
+
+重新链接
+
 use ssh keybased authentication,
-`mkdir -p ~/.ssh` check by ls la
+`mkdir -p ~/.ssh` 检测用 ls -la
+
 copy ssh key to web, at local 
+
 `ssh-keygen -b 4096` 这样login without password
-`scp ~/.ssh/id_rsa.pub faradawn@103:~/.ssh/authorized_keys` 复制到server check by `ls .ssh`
+
+`scp ~/.ssh/id_rsa.pub faradawn@103.79.76.243:~/.ssh/authorized_keys` 复制到server check by `ls .ssh`
 
 设置权限
+
 `sudo chmod 700 ~/.ssh/`
+
 `sudo chmod 600 ~/.ssh/*`
 
 取消其他人
-`sudo nano /etc/ssh/sshd_config`
-`sudo 
+
+`sudo nano /etc/ssh/sshd_config` 设置 PermitRootLogin no 和 #PasswordAuthentications no
+
+`sudo systemctl restart sshd` 重启
+
+防火墙
+```
+sudo apt-get install ufw
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+sudo ufw allow ssh
+sudo ufw allow 8000
+sudo ufw enable
+sudo ufw status
+// 之后再allow http
+```
+
+
 
 
 ## Deploy to a CentOS server (宝塔面板)
