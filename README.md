@@ -50,8 +50,40 @@ sudo ufw status
 // 之后再allow http
 ```
 
+### copy to server
+```
+scp -r django-api faradawn@103.79.76.243:~/
+sudo apt-get install python3-pip
+sudo apt-get install python3-venv
+python3 -m venv django-api/django-env
+source django-env/bin/activate
+pip install -r requirements.txt
+// 出问题见下文
+```
+
+### 更改设置
+```
+// 在 settings.py
+ALLOWED_HOSTS = ['103.79.76.243']
+
+// static 在MEIDA root 之上
+STATIC_ROOT = os.path.join(DASE_DIR, 'static')
+// 输入collect statics
+// python manage.py collectstatic
+
+```
+### 安装Postgres
+```
+// 下载
+sudo apt install postgresql postgresql-contrib
+// 新建数据库
+sudo -u postgres psql
+postgres=# create database myapi_db;
+postgres=# create user faradawn with encrypted password 'xxx';
+postgres=# grant all privileges on database myapi_db to faradawn;
 
 
+```
 
 ## Deploy to a CentOS server (宝塔面板)
 ### 1 - 安装 python 和 postgres 管理器
@@ -71,7 +103,10 @@ zip项目上传到 /wwwroot
 cd /www/wwwroot/faradcloud.live; source ./django-api_venv/bin/activate; python manage.py runserver
 pip install django
 pip install djangorestframework
-pip install psycopg2-binary
+// 出问题
+sudo apt install python3-dev libpq-dev
+pip3 install psycopg2
+
 
 ```
 尝试 runserver 如果 port 8000 already in use
