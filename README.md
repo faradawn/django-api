@@ -2,7 +2,7 @@
 
 ## How to Deploy to Ubuntu 18.04 Server [2021.6.20]
 
-### 1 - 设置服务器
+### 1 - 设置服务器\
 设置新host和user
 ```
 // 更新Ubuntu
@@ -13,7 +13,7 @@ hostnamectl set-hostname django-server
 hostname 
 
 // 在 `nano /etc/hosts` 添加 （中间用tab）
-103.79.76.243     django-server 
+103.     django-server 
 
 // 新建服务器用户并赋予sudo
 adduser faradawn
@@ -49,13 +49,13 @@ sudo ufw allow 8000
 sudo ufw enable
 sudo ufw status
 // 之后再allow http
-```
+```\
 
 
 ### 2 - 上传Django项目
 拷贝到服务器
 ```
-scp -r django-api faradawn@103.79.76.243:~/
+scp -r django-api faradawn@103:~/
 sudo apt-get install python3-pip
 sudo apt-get install python3-venv
 ```
@@ -65,13 +65,15 @@ sudo apt-get install python3-venv
 python3 -m venv django-api/django-env
 source django-env/bin/activate
 pip install -r requirements.txt
-// 出问题见下文
+// 出问题就用
+sudo apt install python3-dev libpq-dev
+pip3 install psycopg2
 ```
 
 设置django static
 ```
 // 在 settings.py
-ALLOWED_HOSTS = ['103.79.76.243']
+ALLOWED_HOSTS = ['103.']
 
 // static 在MEIDA root 之上
 STATIC_ROOT = os.path.join(DASE_DIR, 'static')
@@ -99,6 +101,7 @@ psql -U faradawn letter_db < letter.db
 source django-api/django-env/bin/activate
 python manage.py runserver 0.0.0.0:8000
 ```
+
 
 ### 3 - 安装Apache
 下载 apache2
@@ -160,7 +163,7 @@ sudo vi settings
 sudo nano /etc/api-config.json
 
 {
-        "SECRET_KEY": "django-insecure-rkjkqxbxxxx"
+        "SECRET_KEY": "django-insecure-rkjkqx"
 }
 
 // 在项目 settings.py
