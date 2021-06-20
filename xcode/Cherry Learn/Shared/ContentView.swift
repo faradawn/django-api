@@ -46,7 +46,7 @@ struct ContentView: View {
     
     // load account
     func loadAccount() {
-        guard let users_url = URL(string: "http://127.0.0.1:8000/myapi/users/") else {
+        guard let users_url = URL(string: "http://103.79.76.243/myapi/users/") else {
             print("myapi is crashed")
             return
         }
@@ -105,7 +105,7 @@ struct AddView : View {
     }
     
     func postAccount(){
-        guard let users_url = URL(string: "http://127.0.0.1:8000/myapi/users/") else {
+        guard let users_url = URL(string: "http://103.79.76.243/myapi/users/") else {
             print("myapi is crashed")
             return
         }

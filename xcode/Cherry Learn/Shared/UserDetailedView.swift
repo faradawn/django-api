@@ -42,7 +42,7 @@ struct UserDetailedView: View {
     }
     
     func deleteUser(){
-        guard let users_url = URL(string: "http://127.0.0.1:8000/myapi/users/\(self.users.id)/") else {
+        guard let users_url = URL(string: "http://103.79.76.243/myapi/users/\(self.users.id)/") else {
             print("myapi is crashed")
             return
         }

@@ -35,7 +35,7 @@ struct EditView: View {
     }
     
     func updateUser(){
-        guard let users_url = URL(string: "http://127.0.0.1:8000/myapi/users/\(self.user.id)/") else {
+        guard let users_url = URL(string: "http://103.79.76.243/myapi/users/\(self.user.id)/") else {
             print("updata user: myapi is crashed")
             fatalError("endpoint not active")
         }
