@@ -2,7 +2,7 @@
 
 ## How to Deploy to Ubuntu 18.04 Server [2021.6.20]
 
-### 1 - 设置服务器\
+### 1 - 设置服务器  
 设置新host和user
 ```
 // 更新Ubuntu
@@ -49,7 +49,7 @@ sudo ufw allow 8000
 sudo ufw enable
 sudo ufw status
 // 之后再allow http
-```\
+```  
 
 
 ### 2 - 上传Django项目
@@ -100,7 +100,8 @@ psql -U faradawn letter_db < letter.db
 // 开启服务器
 source django-api/django-env/bin/activate
 python manage.py runserver 0.0.0.0:8000
-```
+```  
+
 
 
 ### 3 - 安装Apache
@@ -113,6 +114,7 @@ cd /etc/apache2/sites-available
 sudo cp 000-default.conf django-api.conf
 sudo nano django-api.conf
 ```
+
 在 django-api.conf 里黏贴
 ```
 Alias /static /home/faradawn/django-api/static
@@ -182,31 +184,11 @@ sudo ufw allow http/tcp
 sudo service apache2 restart
 ```
 
-
-## How to Deploy to a CentOS server (宝塔面板)
-### 1 - 安装 python 和 postgres 管理器
-python 3.8.5, 新建项目
-postgres 11
-
-### 2 - 新建站点
-pip3 freeze > requirements.txt
-zip项目上传到 /wwwroot
-
-### 3 - 配置 uwsgi.ini
-新建uswgi.ini
-
-### # - 问题集合
-- [x] 宝塔
-```
-cd /www/wwwroot/faradcloud.live; source ./django-api_venv/bin/activate; python manage.py runserver
-pip install django
-pip install djangorestframework
-// 出问题
-sudo apt install python3-dev libpq-dev
-pip3 install psycopg2
-
-```
+### 问题集合
 - [x] 尝试 runserver 如果 port 8000 already in use (只是宝塔问题)
 - [x] 无法写入数据库 (`sudo chmod 775 django-api/`)
-- [x] Django: no credential found (添加 `sudo nano /etc/apache2/sites-avaible/django-api.conf` ，然后重启 `sudo service apache2 restart`
+- [x] Django: no credential found (添加 `sudo nano /etc/apache2/sites-avaible/django-api.conf` ，然后重启 `sudo service apache2 restart` 
 
+
+
+## 祝成功！
