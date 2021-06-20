@@ -184,6 +184,12 @@ sudo ufw allow http/tcp
 sudo service apache2 restart
 ```
 
+### 4 - 用 Git 部署到 VPS
+新建gitrepo
+```
+mkdir project.git
+
+```
 ### 问题集合
 - [x] 尝试 runserver 如果 port 8000 already in use (只是宝塔问题)
 - [x] 无法写入数据库 (`sudo chmod 775 django-api/`)
