@@ -1,3 +1,4 @@
 /secret/secret.json
 Pipfile
 .DS_Store
+mysite/settings.py
